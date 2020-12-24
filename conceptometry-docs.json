@@ -1,0 +1,1322 @@
+{
+	"info": {
+		"_postman_id": "fbd6afc3-8622-403e-9b4f-7521f3436e79",
+		"name": "Conceptometry",
+		"description": "A LMS which will improve the results of students",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('TOKEN', pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "yashrajpahwa@gmail.com",
+									"description": "Student 1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "yash9raj#",
+									"description": "Student 1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "kamaldeeppahwa@gmail.com",
+									"description": "Teacher",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "yash9raj",
+									"description": "Teacher",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "This route allows users to sign in to the application with their email and password."
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "yashrajpahwa@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/forgotpassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgotpassword"
+							]
+						},
+						"description": "This route will send an email to you if you cannot recall your password and if your account is present in the database by passing in your email in the body."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "yash9raj#",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/resetpassword/:token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"resetpassword",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "df10058f335dfac0857e7991372ddcf974d0b1a3"
+								}
+							]
+						},
+						"description": "After you have gotten the password reset link on your mail you can reset your password by passing the token in the URL parameters. You can then pass the password param in the body which will then be your new password"
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "yashrajpahwa@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/initiateuser",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"initiateuser"
+							]
+						},
+						"description": "This route will send a one time link to the parents to register their students on the platform by passing email param in the body"
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('TOKEN', pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "yashrajpahwa@gmail.co",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "grade",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "9899395955",
+									"type": "text"
+								},
+								{
+									"key": "parentsEmail",
+									"value": "manpreetpahwa@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "parentsName",
+									"value": "Manpreet",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Yashraj 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/register/:token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "e5206cb30fba3f2d3fab564202b55bfef550ef51"
+								}
+							]
+						},
+						"description": "After you have recieved the email with the onetime link you can use the token by passing it in the URL params & parents can register their wards on the platform "
+					},
+					"response": []
+				}
+			],
+			"description": "A complete authentication system with login, register and password reset functionality"
+		},
+		{
+			"name": "Lectures",
+			"item": [
+				{
+					"name": "Get all lectures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/lectures",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures"
+							]
+						},
+						"description": "This route will show the student all the lectures that he has to attend or the teachers, the lecture that she has to take and/or has created"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new lecture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Math",
+									"type": "text"
+								},
+								{
+									"key": "fromTime",
+									"value": "22:00",
+									"type": "text"
+								},
+								{
+									"key": "fromDate",
+									"value": "19-12-2020",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "60 ",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "maths",
+									"type": "text"
+								},
+								{
+									"key": "student",
+									"value": "5fcc88f279b34749b8e1d9f7",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/lectures",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures"
+							]
+						},
+						"description": "This route is used for creating new lectures by the teacher"
+					},
+					"response": []
+				},
+				{
+					"name": "Get lecture by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/lectures/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd39626c8240142b8c0a139"
+								}
+							]
+						},
+						"description": "This route can get any particular lecture by Id you can only view if your have created the lecture or you are a student in the lecture."
+					},
+					"response": []
+				},
+				{
+					"name": "Update lecture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fromDate",
+									"value": "20-12-2020",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fromTime",
+									"value": "21:00",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "eventTime",
+									"value": "yasajs",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "byUser",
+									"value": "5fccbe5ee9be4b1cb494ee64",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/lectures/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd39626c8240142b8c0a139"
+								}
+							]
+						},
+						"description": "This route will allow you to edit the lecture only if you have created that particular lecture by passing in the lecture id in the URL param"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete lecture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/lectures/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd38910f836852bc0196c9a"
+								}
+							]
+						},
+						"description": "This route will allow you to delete the lecture only if you have created that particular lecture by passing in the lecture id in the URL param"
+					},
+					"response": []
+				}
+			],
+			"description": "All information related to lecture scheduling"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all students",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users/student",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"student"
+							]
+						},
+						"description": "This route will allow the teacher to view her students"
+					},
+					"response": []
+				},
+				{
+					"name": "Update My Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "currentPassword",
+									"value": "old-password",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "new-password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users/me/password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"me",
+								"password"
+							]
+						},
+						"description": "This route will take in the current password of the user along with the new password of the user and will modify that accounts password. Fields (currentPassword, newPassword)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"me"
+							]
+						},
+						"description": "This route will get the logged in User and that accounts information except the hashed password. An authorization header should be passed which will be authorization: 'Bearer token' "
+					},
+					"response": []
+				},
+				{
+					"name": "Get user with ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fccbe5ee9be4b1cb494ee63"
+								}
+							]
+						},
+						"description": "This route allows teachers to get their students details by passing in the id in the params."
+					},
+					"response": []
+				},
+				{
+					"name": "Update user with ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Kamaldeep",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fccbe5ee9be4b1cb494ee63"
+								}
+							]
+						},
+						"description": "This route allows teachers to change their students information by passing in the id in the params. NOTE: Password cannot be changed with this route"
+					},
+					"response": []
+				}
+			],
+			"description": "All funtions related to users"
+		},
+		{
+			"name": "Assignments",
+			"item": [
+				{
+					"name": "Get Assignment by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd776186783813434cbc75f"
+								}
+							]
+						},
+						"description": "This route will allow the user to get a particular assignment by passing in the assignment Id in the URL params"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "dueDate",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "student",
+									"value": "5fcc88f279b34749b8e1d9f7",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "SST eco assignment",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Do revise your chapter",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments"
+							]
+						},
+						"description": "This route allows the teachers to create new assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get assignments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments"
+							]
+						},
+						"description": "This route allows the teacher to view all the created assignments and the students to view all the assignments he/she has been marked in to do."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "New Assignment 5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd776186783813434cbc75f"
+								}
+							]
+						},
+						"description": "This route allows the teacher to update assignment by passing in the ID in the URL params. NOTE: Only the owner can update the assignment"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd776186783813434cbc75f"
+								}
+							]
+						},
+						"description": "This route allows the teacher to delete assignment by passing in the ID in the URL params. NOTE: Only the owner can delete the assignment"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload teacher materials",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Yashraj/OneDrive/Desktop/Doc1.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/assignments/:assignmentId/teacher/upload",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								":assignmentId",
+								"teacher",
+								"upload"
+							],
+							"variable": [
+								{
+									"key": "assignmentId",
+									"value": ""
+								}
+							]
+						},
+						"description": "This route allows the teacher to put in the pdf teacher materials in the assignment by passing in the assignmentId in the URL params. NOTE: Only the owner can put in the materials in the assignment & only pdf's can be uploaded"
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD functionality for assignments"
+		},
+		{
+			"name": "Assignment Submissions",
+			"item": [
+				{
+					"name": "Get Student Submissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions"
+							]
+						},
+						"description": "This route will get all the submissions that the student has made till date"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Submissions by Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions/get/:assignmentId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions",
+								"get",
+								":assignmentId"
+							],
+							"variable": [
+								{
+									"key": "assignmentId",
+									"value": "5fd776186783813434cbc75f"
+								}
+							]
+						},
+						"description": "This route will get all the submissions by passing in assignmentID in URL params. NOTE: Only the owner can see the submissions made by the students"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Submissions for Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions/get/:assignmentId/my",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions",
+								"get",
+								":assignmentId",
+								"my"
+							],
+							"variable": [
+								{
+									"key": "assignmentId",
+									"value": "5fd776186783813434cbc75f"
+								}
+							]
+						},
+						"description": "This route will give your submission for a particular assignment you can access it by passing in the assignmentId in the url params"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Submission by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd7487a6333073c1c74b420"
+								}
+							]
+						},
+						"description": "This route will allow you to get and see a particular submission by passing in the ID in the URL params"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "submissionText",
+									"value": "This is a submission",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Yashraj/OneDrive/Desktop/Doc1.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions/submit/:assingmentId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions",
+								"submit",
+								":assingmentId"
+							],
+							"variable": [
+								{
+									"key": "assingmentId",
+									"value": "5fd0c5218a18fc45a084001a"
+								}
+							]
+						},
+						"description": "This route will allow you to submit your assignment by passing in the assignmentId in the URL params"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Student Submission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "marks",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/submissions/:id/mark",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"submissions",
+								":id",
+								"mark"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5fd7487a6333073c1c74b420"
+								}
+							]
+						},
+						"description": "This route will allow the owner of the assignment to mark you he/she can also give you remarks on the same."
+					},
+					"response": []
+				}
+			],
+			"description": "All the things related to assignment submissions",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
